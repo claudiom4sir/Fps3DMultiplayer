@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Camera))]
 public class PlayerMotor : MonoBehaviour {
 
-    public Rigidbody rb;
     public Camera cam;
 
+    private Rigidbody rb;
     private Vector3 velocity;
     private Vector3 rotation;
     private Vector3 cameraRotation;
@@ -32,7 +34,7 @@ public class PlayerMotor : MonoBehaviour {
 
     public void RotateCamera(Vector3 _cameraRotation) // used also for check that the angle of camera's rotation is not out of range
     {
-        cameraRotation = cameraRotation - _cameraRotation;
+        cameraRotation = cameraRotation - _cameraRotation * Time.fixedDeltaTime;
         float x = Mathf.Clamp(cameraRotation.x, -cameraRotationAngleLimit, cameraRotationAngleLimit);
         cameraRotation = new Vector3(x, 0f, 0f);
     }
@@ -61,7 +63,7 @@ public class PlayerMotor : MonoBehaviour {
     {
         if (rotation == Vector3.zero)
             return;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation * Time.fixedDeltaTime));
     }
 
     private void DoCamRotation()

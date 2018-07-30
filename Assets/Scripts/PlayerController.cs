@@ -3,7 +3,7 @@
 public class PlayerController : MonoBehaviour {
 
     public float speed = 5f;
-    public float lookSensibility = 5f;
+    public float lookSensibility = 500f;
     public float thrustForce = 1000f;
     public PlayerMotor motor;
 

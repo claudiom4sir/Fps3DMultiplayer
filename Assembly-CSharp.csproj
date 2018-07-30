@@ -96,11 +96,13 @@
     <Compile Include="Assets\Import\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointProgressTracker.cs" />
-    <Compile Include="Assets\PlayerSetup.cs" />
-    <Compile Include="Assets\PlayerShoot.cs" />
-    <Compile Include="Assets\PlayerWeapon.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerMotor.cs" />
+    <Compile Include="Assets\Scripts\PlayerSetup.cs" />
+    <Compile Include="Assets\Scripts\PlayerShoot.cs" />
+    <Compile Include="Assets\Scripts\PlayerWeapon.cs" />
     <None Include="Assets\Import\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
     <None Include="Assets\Import\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <Reference Include="UnityEditor.StandardEvents">
