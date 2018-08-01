@@ -4,6 +4,7 @@
 public class PlayerMotor : MonoBehaviour {
 
     public Camera cam;
+
     private Rigidbody rb;
     private Vector3 velocity;
     private Vector3 rotation;

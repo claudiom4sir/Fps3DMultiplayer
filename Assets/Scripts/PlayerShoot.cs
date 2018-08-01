@@ -24,7 +24,7 @@ public class PlayerShoot : NetworkBehaviour {
                 CmdPlayerShoot(hit.collider.name, weapon.damage);
     }
 
-    [Command] // it is used for to say that this method will be invoked only on the server
+    [Command] // it is used for to say that this method will be invoked only on the server by clients
     private void CmdPlayerShoot(string playerID, int damage)
     {
         Debug.Log(playerID + "hit!");

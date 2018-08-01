@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
     public float speed = 5f;
     public float lookSensibility = 500f;
     public float thrustForce = 1000f;
+
     private PlayerMotor motor;
 
     private void Start()
@@ -40,6 +41,8 @@ public class PlayerController : MonoBehaviour {
         Vector3 _thrustForce = Vector3.zero;
         if (Input.GetButton("Jump"))
             _thrustForce = Vector3.up * thrustForce; // when you press jump key, you make a thrustForce
+        else
+            _thrustForce = Vector3.down * thrustForce;
         
         // apply the thrust force for to fly
         motor.Fly(_thrustForce); // player can fly with a thrust equals to thrustForce

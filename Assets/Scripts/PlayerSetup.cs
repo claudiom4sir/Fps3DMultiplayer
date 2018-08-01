@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 public class PlayerSetup : NetworkBehaviour {
 
     public Behaviour[] componentsToDisable;
+
     private const string REMOTEPLAYERNAME = "RemotePlayer";
     private Camera mainCamera;
     private Player player;

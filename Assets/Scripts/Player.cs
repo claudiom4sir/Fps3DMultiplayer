@@ -1,22 +1,31 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
+using System.Collections;
 
 public class Player : NetworkBehaviour {
 
     public int startHealth = 100;
+    public Behaviour[] disableOnDeath;
 
-    [SyncVar]
-    private bool isDead = false;
     [SyncVar] // used for change this value in every clients that are connected with the server 
     private int currentHeath;
-    public Behaviour[] disableOnDeath;
+    [SyncVar]
+    private bool isDead = false;
+
     private bool[] wasEnabled;
+
+
 
     public void Setup()
     {
         wasEnabled = new bool[disableOnDeath.Length];
         for (int i = 0; i < disableOnDeath.Length; i++) // used for store the value
             wasEnabled[i] = disableOnDeath[i].enabled;
+        SetDefault();
+    }
+
+    private void SetDefault() // called for set the default setting of the player
+    {
         currentHeath = startHealth;
         isDead = false;
         for (int i = 0; i < disableOnDeath.Length; i++) // used for restore the value when player respawns
@@ -36,7 +45,7 @@ public class Player : NetworkBehaviour {
         isDead = value;
     }
 
-    [ClientRpc]
+    [ClientRpc] // this attribute says that this method will be called on clients from the server
     public void RpcTakeDamage(int damage)
     {
         if (isDead)
@@ -55,6 +64,17 @@ public class Player : NetworkBehaviour {
         Collider collider = GetComponent<Collider>();
         if (collider != null)
             collider.enabled = false;
+        StartCoroutine(Respown()); // it respawns the player
+    }
+
+    private IEnumerator Respown() // wait fews seconds and start the procedure for respawn
+    {
+        yield return new WaitForSeconds(GameManager.singleton.matchSetting.respawnTime);
+        SetDefault();
+        Transform startPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = startPoint.position;
+        transform.rotation = startPoint.rotation;
+        Debug.Log(gameObject.name + "respawned");
     }
 
 }
