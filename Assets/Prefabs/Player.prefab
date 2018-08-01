@@ -389,13 +389,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 20431208908603446}
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967039
   weapon:
     name: M4
     damage: 10
     range: 100
-  mask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &114256945695217516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,7 +429,6 @@ MonoBehaviour:
   speed: 5
   lookSensibility: 500
   thrustForce: 1000
-  motor: {fileID: 114929763390505876}
 --- !u!114 &114339318393485270
 MonoBehaviour:
   m_ObjectHideFlags: 1

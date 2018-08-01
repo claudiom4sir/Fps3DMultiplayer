@@ -5,8 +5,9 @@ using UnityEngine.Networking;
 public class PlayerSetup : NetworkBehaviour {
 
     public Behaviour[] componentsToDisable;
-    private string remoteLayerName = "RemotePlayer";
+    private const string REMOTEPLAYERNAME = "RemotePlayer";
     private Camera mainCamera;
+    private Player player;
 
     private void Start()
     {
@@ -21,7 +22,8 @@ public class PlayerSetup : NetworkBehaviour {
             if(mainCamera != null)
                 mainCamera.gameObject.SetActive(false);
         }
-
+        player = GetComponent<Player>();
+        player.Setup();
     }
 
     public override void OnStartClient()
@@ -53,7 +55,7 @@ public class PlayerSetup : NetworkBehaviour {
 
     private void AssigneRemotePlayer()
     {
-        gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
+        gameObject.layer = LayerMask.NameToLayer(REMOTEPLAYERNAME);
     }
 
     private void DisableComponents() // it disable all components in the list

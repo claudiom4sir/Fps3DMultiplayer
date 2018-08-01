@@ -4,11 +4,11 @@ using UnityEngine.Networking;
 public class PlayerShoot : NetworkBehaviour {
 
     public Camera cam;
-    public PlayerWeapon weapon;
     public LayerMask mask;
+    public PlayerWeapon weapon;
 
     private const string PLAYERTAG = "Player";
-
+    
     private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -29,7 +29,7 @@ public class PlayerShoot : NetworkBehaviour {
     {
         Debug.Log(playerID + "hit!");
         Player player = GameManager.GetPlayer(playerID);
-        player.TakeDamage(damage);
+        player.RpcTakeDamage(damage);
     }
 
 }

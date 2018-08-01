@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Camera))]
 public class PlayerMotor : MonoBehaviour {
 
     public Camera cam;
-
     private Rigidbody rb;
     private Vector3 velocity;
     private Vector3 rotation;
@@ -34,7 +32,7 @@ public class PlayerMotor : MonoBehaviour {
 
     public void RotateCamera(Vector3 _cameraRotation) // used also for check that the angle of camera's rotation is not out of range
     {
-        cameraRotation = cameraRotation - _cameraRotation * Time.fixedDeltaTime;
+        cameraRotation = cameraRotation - _cameraRotation * Time.fixedDeltaTime; // is x is positive, the rotation goes down and if is negative, the rotation goes up
         float x = Mathf.Clamp(cameraRotation.x, -cameraRotationAngleLimit, cameraRotationAngleLimit);
         cameraRotation = new Vector3(x, 0f, 0f);
     }
@@ -70,7 +68,8 @@ public class PlayerMotor : MonoBehaviour {
     {
         if (cameraRotation == Vector3.zero)
             return;
-        cam.transform.localEulerAngles = cameraRotation;
+        cam.transform.localEulerAngles = cameraRotation; // if rotation is already equals to the limit, nothing happens
+        // localEulerAngles rotates on the x axis the camera, where up rotation is negative x and down rotation is positive x
     }
 
     private void DoFlight()

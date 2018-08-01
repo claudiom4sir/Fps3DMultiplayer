@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
 
     public float speed = 5f;
     public float lookSensibility = 500f;
     public float thrustForce = 1000f;
-    public PlayerMotor motor;
+    private PlayerMotor motor;
+
+    private void Start()
+    {
+        motor = GetComponent<PlayerMotor>();
+    }
 
     private void Update()
     {
