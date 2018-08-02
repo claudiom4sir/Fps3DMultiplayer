@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour {
 
     public float speed = 5f;
     public float lookSensibility = 500f;
     public float thrustForce = 1000f;
+    public Animator animator;
 
     private PlayerMotor motor;
+
 
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -22,10 +26,13 @@ public class PlayerController : MonoBehaviour {
         float zMoviment = Input.GetAxis("Vertical");
         Vector3 horizontalMoviment = transform.right * xMoviment;
         Vector3 verticalMoviment = transform.forward * zMoviment;
-        Vector3 velocity = (horizontalMoviment + verticalMoviment).normalized * speed;
+        Vector3 velocity = (horizontalMoviment + verticalMoviment) * speed;
 
         // apply the moviment
         motor.Move(velocity);
+
+        // thrusters animator moviment
+        animator.SetFloat("MovimentDirection", zMoviment);
 
         // calculate the rotation moviment with mouse
         float yRotation = Input.GetAxis("Mouse X"); // when you move mouse left or right, we have to rotate on the Y axis

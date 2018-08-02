@@ -14,7 +14,7 @@ public class PlayerSetup : NetworkBehaviour {
     {
         if (!isLocalPlayer)
         {
-            DisableComponents();
+            DisableComponents(); // these components are disabled because, in this mode, it's not possible to control another player
             AssigneRemotePlayer();
         }
         else
