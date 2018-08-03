@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMotor : MonoBehaviour {
 
     public Camera cam;
+    public ParticleSystem[] thrusters;
 
     private Rigidbody rb;
     private Vector3 velocity;
@@ -11,6 +13,8 @@ public class PlayerMotor : MonoBehaviour {
     private Vector3 cameraRotation;
     private Vector3 thrustForce;
     private float cameraRotationAngleLimit = 45f;   // this is the angle for the rotation of the camera starting by initial position
+    private Animator animator;
+    private float thrustersDirection;
 
     private void Start()
     {
@@ -19,11 +23,14 @@ public class PlayerMotor : MonoBehaviour {
         rotation = Vector3.zero;
         cameraRotation = Vector3.zero;
         thrustForce = Vector3.zero;
+        animator = GetComponent<Animator>();
+        thrustersDirection = 0f;
     }
 
-    public void Move(Vector3 _velocity)
+    public void Move(Vector3 _velocity, float _thrustersDirection)
     {
         velocity = _velocity;
+        thrustersDirection = _thrustersDirection;
     }
 
     public void Rotate(Vector3 _rotation)
@@ -46,9 +53,15 @@ public class PlayerMotor : MonoBehaviour {
     private void FixedUpdate() // used instead Update because it's controlled by Phisics Engine
     {
         DoMoviment();
+        AnimateThrusters();
         DoRotation();
         DoCamRotation();
         DoFlight();
+    }
+
+    private void AnimateThrusters()
+    {
+        animator.SetFloat("MovimentDirection", thrustersDirection);
     }
 
     private void DoMoviment()

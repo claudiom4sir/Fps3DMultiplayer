@@ -5,10 +5,14 @@ using UnityEngine.Networking;
 public class PlayerSetup : NetworkBehaviour {
 
     public Behaviour[] componentsToDisable;
+    public string dontDrawLayer = "DontDraw";
+    public GameObject graphic;
+    public GameObject playerUI;
 
     private const string REMOTEPLAYERNAME = "RemotePlayer";
     private Camera mainCamera;
     private Player player;
+    private GameObject playerUIInstance;
 
     private void Start()
     {
@@ -22,9 +26,25 @@ public class PlayerSetup : NetworkBehaviour {
             mainCamera = Camera.main;
             if(mainCamera != null)
                 mainCamera.gameObject.SetActive(false);
+            SetAllLayer(graphic, LayerMask.NameToLayer(dontDrawLayer)); // NameToLayer give an index from the string layer
         }
         player = GetComponent<Player>();
         player.Setup();
+        CreateUI();
+    }
+
+    private void CreateUI()
+    {
+        playerUIInstance = Instantiate(playerUI);
+        playerUIInstance.name = playerUI.name;
+    }
+
+    // this method sets the layer of all compoments in graphic for don't be represented by the camera
+    private void SetAllLayer(GameObject graphic, int layerIndex)
+    {
+        graphic.layer = layerIndex;
+        foreach (Transform obj in graphic.transform)
+            SetAllLayer(obj.gameObject, layerIndex);
     }
 
     public override void OnStartClient()
@@ -52,6 +72,7 @@ public class PlayerSetup : NetworkBehaviour {
         if(mainCamera != null)
             mainCamera.gameObject.SetActive(true);
         GameManager.UnRegisterPlayer(gameObject.name);
+        Destroy(playerUIInstance);
     }
 
     private void AssigneRemotePlayer()

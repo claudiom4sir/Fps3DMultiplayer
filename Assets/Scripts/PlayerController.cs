@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
-[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour {
 
     public float speed = 5f;
@@ -15,7 +14,6 @@ public class PlayerController : MonoBehaviour {
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
-        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -29,10 +27,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 velocity = (horizontalMoviment + verticalMoviment) * speed;
 
         // apply the moviment
-        motor.Move(velocity);
-
-        // thrusters animator moviment
-        animator.SetFloat("MovimentDirection", zMoviment);
+        motor.Move(velocity, zMoviment);
 
         // calculate the rotation moviment with mouse
         float yRotation = Input.GetAxis("Mouse X"); // when you move mouse left or right, we have to rotate on the Y axis
@@ -45,11 +40,11 @@ public class PlayerController : MonoBehaviour {
         motor.RotateCamera(rotationOnX);
 
         // calculate jump force
-        Vector3 _thrustForce = Vector3.zero;
+        Vector3 _thrustForce;
         if (Input.GetButton("Jump"))
             _thrustForce = Vector3.up * thrustForce; // when you press jump key, you make a thrustForce
         else
-            _thrustForce = Vector3.down * thrustForce;
+            _thrustForce = Vector3.zero;
         
         // apply the thrust force for to fly
         motor.Fly(_thrustForce); // player can fly with a thrust equals to thrustForce
