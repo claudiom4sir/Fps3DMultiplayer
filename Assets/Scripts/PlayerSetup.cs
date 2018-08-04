@@ -5,11 +5,11 @@ using UnityEngine.Networking;
 public class PlayerSetup : NetworkBehaviour {
 
     public Behaviour[] componentsToDisable;
-    public string dontDrawLayer = "DontDraw";
-    public GameObject graphic;
+    public GameObject playerGraphic;
     public GameObject playerUI;
 
-    private const string REMOTEPLAYERNAME = "RemotePlayer";
+    private const string REMOTEPLAYERLAYER = "RemotePlayer";
+    private const string DONTDRAWLAYER = "DontDraw";
     private Camera mainCamera;
     private Player player;
     private GameObject playerUIInstance;
@@ -19,18 +19,17 @@ public class PlayerSetup : NetworkBehaviour {
         if (!isLocalPlayer)
         {
             DisableComponents(); // these components are disabled because, in this mode, it's not possible to control another player
-            AssigneRemotePlayer();
+            AssigneRemotePlayerLayer();
         }
         else
         {
+            player.Setup();
+            CreateUI();
             mainCamera = Camera.main;
             if(mainCamera != null)
                 mainCamera.gameObject.SetActive(false);
-            SetAllLayer(graphic, LayerMask.NameToLayer(dontDrawLayer)); // NameToLayer give an index from the string layer
+            SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER)); // NameToLayer give an index from the string layer
         }
-        player = GetComponent<Player>();
-        player.Setup();
-        CreateUI();
     }
 
     private void CreateUI()
@@ -39,7 +38,7 @@ public class PlayerSetup : NetworkBehaviour {
         playerUIInstance.name = playerUI.name;
     }
 
-    // this method sets the layer of all compoments in graphic for don't be represented by the camera
+    // this method sets the layer of all compoments in graphic for don't be rendered by the camera
     private void SetAllLayer(GameObject graphic, int layerIndex)
     {
         graphic.layer = layerIndex;
@@ -52,7 +51,7 @@ public class PlayerSetup : NetworkBehaviour {
         base.OnStartClient();
         SetPlayerName(); // it called here because OnStartClient() will be called before Start()
         string playerID = GetPlayerName();
-        Player player = GetComponent<Player>();
+        player = GetComponent<Player>();
         GameManager.RegisterPlayer(playerID, player);
     }
 
@@ -75,9 +74,9 @@ public class PlayerSetup : NetworkBehaviour {
         Destroy(playerUIInstance);
     }
 
-    private void AssigneRemotePlayer()
+    private void AssigneRemotePlayerLayer()
     {
-        gameObject.layer = LayerMask.NameToLayer(REMOTEPLAYERNAME);
+        gameObject.layer = LayerMask.NameToLayer(REMOTEPLAYERLAYER);
     }
 
     private void DisableComponents() // it disable all components in the list

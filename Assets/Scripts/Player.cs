@@ -11,10 +11,7 @@ public class Player : NetworkBehaviour {
     private int currentHeath;
     [SyncVar]
     private bool isDead = false;
-
     private bool[] wasEnabled;
-
-
 
     public void Setup()
     {
