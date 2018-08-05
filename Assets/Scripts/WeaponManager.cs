@@ -9,15 +9,18 @@ public class WeaponManager : NetworkBehaviour {
 
     private PlayerWeapon currentWeapon;
     private GameObject weaponInstance;
+    private WeaponGraphic weaponGraphics;
 
 	private void Start ()
     {
         SetWeapon(startWeapon);
 	}
 
-    private void SetWeaponLayer()
+    private void SetWeaponLayer(GameObject obj)
     {
-        weaponInstance.layer = LayerMask.NameToLayer(weaponLayerName);
+        obj.layer = LayerMask.NameToLayer(weaponLayerName);
+        foreach (Transform tr in obj.transform)
+            SetWeaponLayer(tr.gameObject);
     }
 
     private void SetWeapon(PlayerWeapon _weapon)
@@ -25,8 +28,9 @@ public class WeaponManager : NetworkBehaviour {
         currentWeapon = _weapon;
         weaponInstance = Instantiate(startWeapon.graphic, weaponHolder.position, weaponHolder.rotation);
         weaponInstance.transform.SetParent(weaponHolder);
+        weaponGraphics = weaponInstance.GetComponent<WeaponGraphic>();
         if (isLocalPlayer)
-            SetWeaponLayer();
+            SetWeaponLayer(weaponInstance);
     }
 
     public PlayerWeapon GetCurrentWeapon()
@@ -34,5 +38,8 @@ public class WeaponManager : NetworkBehaviour {
         return currentWeapon;
     }
 	
-	
+	public WeaponGraphic GetCurrentWeaponGraphics()
+    {
+        return weaponGraphics;
+    }
 }

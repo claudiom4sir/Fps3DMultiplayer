@@ -25,13 +25,46 @@ public class PlayerShoot : NetworkBehaviour {
             CancelInvoke("Shoot");
     }
 
+    [Command] // it is called from the player on th server when he shoots
+    private void CmdOnShoot()
+    {
+        RpcDoShootEffects();
+    }
+
+    [Command] // it is called from the client to the server when client hits something
+    private void CmdOnHit(Vector3 position, Vector3 direction)
+    {
+        RpcDoHitEffect(position, direction);
+    }
+
+    [ClientRpc] // it is called from the server to all players for display the shoot effect
+    private void RpcDoShootEffects()
+    {
+        ParticleSystem muzzleFlash = weaponManager.GetCurrentWeaponGraphics().muzzleFlash;
+        muzzleFlash.Play();
+    }
+
+    [ClientRpc] // it is called from the server to all clients for show the hit effect on every clients
+    private void RpcDoHitEffect(Vector3 position, Vector3 direction)
+    {
+        ParticleSystem hitEffect = (ParticleSystem) Instantiate(weaponManager.GetCurrentWeaponGraphics().hitEffect, position, Quaternion.LookRotation(direction));
+        hitEffect.Play();
+        Destroy(hitEffect.gameObject, 0.5f);
+    }
+
     [Client] // it is used for say that this method will be invoked only on the client
     private void Shoot()
     {
+        if (!isLocalPlayer) // this method will be called only from local player
+            return;
+        CmdOnShoot();
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
+        {
+            CmdOnHit(hit.point, hit.normal); // call this method with the point hitten and the perpendicular vector of this point
             if (hit.collider.tag == PLAYERTAG)
                 CmdPlayerShoot(hit.collider.name, currentWeapon.damage);
+        }
     }
 
     [Command] // it is used for say that this method will be invoked only on the server by clients

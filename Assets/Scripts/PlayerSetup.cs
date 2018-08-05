@@ -23,13 +23,13 @@ public class PlayerSetup : NetworkBehaviour {
         }
         else
         {
-            player.Setup();
-            CreateUI();
             mainCamera = Camera.main;
             if(mainCamera != null)
                 mainCamera.gameObject.SetActive(false);
             SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER)); // NameToLayer give an index from the string layer
         }
+        player.Setup();
+        CreateUI();
     }
 
     private void CreateUI()

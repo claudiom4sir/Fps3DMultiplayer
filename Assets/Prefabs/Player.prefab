@@ -762,7 +762,6 @@ MonoBehaviour:
   - {fileID: 114304057623980836}
   - {fileID: 20431208908603446}
   - {fileID: 81849873350290656}
-  - {fileID: 114153442938703526}
   - {fileID: 95742281659897214}
   - {fileID: 20449859962651186}
   playerGraphic: {fileID: 1512137412789040}
@@ -782,7 +781,7 @@ MonoBehaviour:
     name: Sci-Fi Automatic
     damage: 10
     range: 100
-    fireRate: 0
+    fireRate: 600
     graphic: {fileID: 1522190955853274, guid: 03d92f4e4248972428eec1faf981dc93, type: 2}
   weaponHolder: {fileID: 4525424848337976}
 --- !u!114 &114661939829494458
