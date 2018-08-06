@@ -58,7 +58,7 @@ public class PlayerMotor : MonoBehaviour {
         // used for set an offset for don't allow the player to touch the horizontals surfaces
         RaycastHit hit;
         if (Physics.Raycast(rb.position, Vector3.down, out hit))
-            configurableJoint.targetPosition = new Vector3(0f, -hit.point.y, 0f);
+            configurableJoint.targetPosition = new Vector3(0f, -hit.point.y, 0f); 
 
         DoMoviment();
         AnimateThrusters();
