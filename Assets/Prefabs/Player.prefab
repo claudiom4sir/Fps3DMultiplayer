@@ -746,6 +746,8 @@ MonoBehaviour:
   lookSensibility: 500
   thrustForce: 1000
   animator: {fileID: 0}
+  thrusterFuelSpeedUp: 0.5
+  thrusterFuelConsume: 1
 --- !u!114 &114339318393485270
 MonoBehaviour:
   m_ObjectHideFlags: 1

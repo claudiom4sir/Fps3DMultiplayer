@@ -67,7 +67,7 @@ public class Player : NetworkBehaviour {
     private IEnumerator Respown() // wait fews seconds and start the procedure for respawn
     {
         yield return new WaitForSeconds(GameManager.singleton.matchSetting.respawnTime);
-        SetDefault();
+        SetDefault(); // not Setup() because it is already executed one time
         Transform startPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = startPoint.position;
         transform.rotation = startPoint.rotation;

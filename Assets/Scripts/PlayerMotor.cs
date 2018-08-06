@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ConfigurableJoint))]
 [RequireComponent(typeof(Animator))]
 public class PlayerMotor : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class PlayerMotor : MonoBehaviour {
     private float cameraRotationAngleLimit = 45f;   // this is the angle for the rotation of the camera starting by initial position
     private Animator animator;
     private float thrustersDirection;
+    private ConfigurableJoint configurableJoint;
 
     private void Start()
     {
@@ -25,6 +27,7 @@ public class PlayerMotor : MonoBehaviour {
         thrustForce = Vector3.zero;
         animator = GetComponent<Animator>();
         thrustersDirection = 0f;
+        configurableJoint = GetComponent<ConfigurableJoint>();
     }
 
     public void Move(Vector3 _velocity, float _thrustersDirection)
@@ -52,6 +55,11 @@ public class PlayerMotor : MonoBehaviour {
 
     private void FixedUpdate() // used instead Update because it's controlled by Phisics Engine
     {
+        // used for set an offset for don't allow the player to touch the horizontals surfaces
+        RaycastHit hit;
+        if (Physics.Raycast(rb.position, Vector3.down, out hit))
+            configurableJoint.targetPosition = new Vector3(0f, -hit.point.y, 0f);
+
         DoMoviment();
         AnimateThrusters();
         DoRotation();

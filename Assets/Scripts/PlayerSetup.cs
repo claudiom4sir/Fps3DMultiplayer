@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerSetup : NetworkBehaviour {
 
     public Behaviour[] componentsToDisable;
@@ -27,15 +28,20 @@ public class PlayerSetup : NetworkBehaviour {
             if(mainCamera != null)
                 mainCamera.gameObject.SetActive(false);
             SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER)); // NameToLayer give an index from the string layer
+            CreateUI(); // only local player has his playerUI
         }
         player.Setup();
-        CreateUI();
     }
 
     private void CreateUI()
     {
-        playerUIInstance = Instantiate(playerUI);
+        // creation
+        playerUIInstance = Instantiate(playerUI); 
         playerUIInstance.name = playerUI.name;
+
+        // set playerController in playerUIInstance
+        PlayerUI pUI = playerUIInstance.GetComponent<PlayerUI>();
+        pUI.playerController = GetComponent<PlayerController>();
     }
 
     // this method sets the layer of all compoments in graphic for don't be rendered by the camera

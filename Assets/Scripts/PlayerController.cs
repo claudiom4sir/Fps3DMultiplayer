@@ -3,10 +3,17 @@
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
 
+    [Header("Movement Settings")]
     public float speed = 5f;
     public float lookSensibility = 500f;
     public float thrustForce = 1000f;
+
     public Animator animator;
+
+    [Header("Thruster Fuel Settings")]
+    public float thrusterFuelSpeedUp = 0.5f;
+    public float thrusterFuelConsume = 2f;
+    private float currentThrusterFuel = 1f;
 
     private PlayerMotor motor;
 
@@ -14,6 +21,11 @@ public class PlayerController : MonoBehaviour {
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
+    }
+
+    public float GetCurrentThrusterFuel()
+    {
+        return currentThrusterFuel;
     }
 
     private void Update()
@@ -40,11 +52,20 @@ public class PlayerController : MonoBehaviour {
         motor.RotateCamera(rotationOnX);
 
         // calculate jump force
-        Vector3 _thrustForce;
+        Vector3 _thrustForce = Vector3.zero;
         if (Input.GetButton("Jump"))
-            _thrustForce = Vector3.up * thrustForce; // when you press jump key, you make a thrustForce
+        {
+            if(currentThrusterFuel > 0f)
+            {
+                currentThrusterFuel = currentThrusterFuel - thrusterFuelConsume * Time.fixedDeltaTime;
+                _thrustForce = Vector3.up * thrustForce; // when you press jump key, you make a thrustForce
+            }
+        }
         else
-            _thrustForce = Vector3.zero;
+        {
+            float fuel = currentThrusterFuel + thrusterFuelSpeedUp * Time.fixedDeltaTime;
+            currentThrusterFuel = Mathf.Clamp(fuel, 0f, 1f);
+        }
         
         // apply the thrust force for to fly
         motor.Fly(_thrustForce); // player can fly with a thrust equals to thrustForce
