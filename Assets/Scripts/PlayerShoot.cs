@@ -18,6 +18,8 @@ public class PlayerShoot : NetworkBehaviour {
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
         currentWeapon = weaponManager.GetCurrentWeapon();
         if (Input.GetButtonDown("Fire1"))
             InvokeRepeating("Shoot", 0f, 60f / currentWeapon.fireRate);
@@ -55,8 +57,6 @@ public class PlayerShoot : NetworkBehaviour {
     [Client] // it is used for say that this method will be invoked only on the client
     private void Shoot()
     {
-        if (!isLocalPlayer) // this method will be called only from local player
-            return;
         CmdOnShoot();
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))

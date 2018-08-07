@@ -23,12 +23,11 @@ public class PlayerSetup : NetworkBehaviour {
             AssigneRemotePlayerLayer();
         }
         else
-        {
-            GameManager.singleton.SetCameraState(false);
+        { 
             SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER)); // NameToLayer give an index from the string layer
             CreateUI(); // only local player has a playerUI
+            player.PlayerSetup();
         }
-        player.Setup();
     }
 
     private void CreateUI()

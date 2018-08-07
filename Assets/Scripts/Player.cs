@@ -15,6 +15,7 @@ public class Player : NetworkBehaviour {
     [SyncVar]
     private bool isDead = false;
     private bool[] wasEnabled;
+    private bool isFirstSetup = true;
 
     private void Update() // used for testing 
     {
@@ -22,11 +23,27 @@ public class Player : NetworkBehaviour {
             RpcTakeDamage(200);
     }
 
-    public void Setup()
+    public void PlayerSetup()
     {
-        wasEnabled = new bool[disableOnDeath.Length];
-        for (int i = 0; i < disableOnDeath.Length; i++) // used for store the value
-            wasEnabled[i] = disableOnDeath[i].enabled;
+        CmdBroadCastPlayerSetup();
+    }
+
+    [Command]
+    private void CmdBroadCastPlayerSetup()
+    {
+        RpcPlayerSetupInAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcPlayerSetupInAllClients()
+    {
+        if (isFirstSetup)
+        {
+            wasEnabled = new bool[disableOnDeath.Length];
+            for (int i = 0; i < disableOnDeath.Length; i++) // used for store the value
+                wasEnabled[i] = disableOnDeath[i].enabled;
+            isFirstSetup = false;
+        }
         SetDefault();
     }
 
@@ -46,7 +63,6 @@ public class Player : NetworkBehaviour {
         Collider collider = GetComponent<Collider>(); // these 3 lines exist because Collider not inherits from Behavior, but Behavior and Collider inherit from Component
         if (collider != null)
             collider.enabled = true;
-
     }
 
     public bool IsDead()
@@ -73,13 +89,13 @@ public class Player : NetworkBehaviour {
     private void Die()
     {
         isDead = true;
-        for (int i = 0; i < goToDisableOnDeath.Length; i++)
-            goToDisableOnDeath[i].SetActive(false);
         if (isLocalPlayer)
         {
             GameManager.singleton.SetCameraState(true);
             GetComponent<PlayerSetup>().GetPlayerUIInstace().SetActive(false);
         }
+        for (int i = 0; i < goToDisableOnDeath.Length; i++)
+            goToDisableOnDeath[i].SetActive(false);
         for (int i = 0; i < disableOnDeath.Length; i++)
             disableOnDeath[i].enabled = false;
         Collider collider = GetComponent<Collider>();
@@ -96,7 +112,7 @@ public class Player : NetworkBehaviour {
         Transform startPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = startPoint.position;
         transform.rotation = startPoint.rotation;
-        SetDefault(); // not Setup() because it is already executed one time
+        PlayerSetup(); // not PlayerSetup() because it is already executed one time, when local player borns
         Debug.Log(gameObject.name + "respawned");
     }
 
