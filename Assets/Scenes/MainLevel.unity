@@ -303,6 +303,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1896949594370174, guid: 239273bad050f0f41bd864eaa5fe90c1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20947407690067940, guid: 239273bad050f0f41bd864eaa5fe90c1,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 239273bad050f0f41bd864eaa5fe90c1, type: 2}
   m_IsPrefabAsset: 0
@@ -820,6 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchSetting:
     respawnTime: 5
+  mainCamera: {fileID: 1957416162}
 --- !u!4 &1813191212
 Transform:
   m_ObjectHideFlags: 0
@@ -833,6 +843,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1957416162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1896949594370174, guid: 239273bad050f0f41bd864eaa5fe90c1,
+    type: 2}
+  m_PrefabInternal: {fileID: 401267412}
 --- !u!1 &1964602097
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fps3DMultiplayer", "Assembly-CSharp.csproj", "{5BC929F2-F6FB-3099-EA81-144DAAC67E72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fps3DMultiplayer", "Assembly-CSharp-Editor.csproj", "{F7F47EE7-42AB-6D25-E0DB-6E11E72E01FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{5BC929F2-F6FB-3099-EA81-144DAAC67E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BC929F2-F6FB-3099-EA81-144DAAC67E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC929F2-F6FB-3099-EA81-144DAAC67E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F47EE7-42AB-6D25-E0DB-6E11E72E01FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F47EE7-42AB-6D25-E0DB-6E11E72E01FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F47EE7-42AB-6D25-E0DB-6E11E72E01FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F47EE7-42AB-6D25-E0DB-6E11E72E01FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

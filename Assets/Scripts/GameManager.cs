@@ -5,11 +5,18 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager singleton;
     public MatchSetting matchSetting;
+    public GameObject mainCamera;
 
     private void Awake()
     {
         if (singleton == null)
             singleton = this;
+    }
+
+    public void SetCameraState(bool value)
+    {
+        if(mainCamera != null)
+            mainCamera.SetActive(value);
     }
 
     #region Player registration/unregistration

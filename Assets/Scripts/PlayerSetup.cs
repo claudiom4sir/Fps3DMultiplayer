@@ -24,11 +24,9 @@ public class PlayerSetup : NetworkBehaviour {
         }
         else
         {
-            mainCamera = Camera.main;
-            if(mainCamera != null)
-                mainCamera.gameObject.SetActive(false);
+            GameManager.singleton.SetCameraState(false);
             SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER)); // NameToLayer give an index from the string layer
-            CreateUI(); // only local player has his playerUI
+            CreateUI(); // only local player has a playerUI
         }
         player.Setup();
     }
@@ -42,6 +40,11 @@ public class PlayerSetup : NetworkBehaviour {
         // set playerController in playerUIInstance
         PlayerUI pUI = playerUIInstance.GetComponent<PlayerUI>();
         pUI.playerController = GetComponent<PlayerController>();
+    }
+
+    public GameObject GetPlayerUIInstace()
+    {
+        return playerUIInstance;
     }
 
     // this method sets the layer of all compoments in graphic for don't be rendered by the camera
@@ -74,8 +77,8 @@ public class PlayerSetup : NetworkBehaviour {
 
     private void OnDisable() // when this player will be destroyed, the main camera will be activated
     {
-        if(mainCamera != null)
-            mainCamera.gameObject.SetActive(true);
+        if(isLocalPlayer)
+            GameManager.singleton.SetCameraState(true);
         GameManager.UnRegisterPlayer(gameObject.name);
         Destroy(playerUIInstance);
     }
