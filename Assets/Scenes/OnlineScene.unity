@@ -679,6 +679,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114139218512083844, guid: 766268aa768ad71449b50146205454ba,
+        type: 2}
+      propertyPath: m_OfflineScene
+      value: LobbyScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 114139218512083844, guid: 766268aa768ad71449b50146205454ba,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: OnlineScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 766268aa768ad71449b50146205454ba, type: 2}
   m_IsPrefabAsset: 0
