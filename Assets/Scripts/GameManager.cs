@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake()
     {
-        if (singleton == null)
+        if (singleton == null) // implementation of singleton pattern, so exists only one instance of this object
             singleton = this;
     }
 

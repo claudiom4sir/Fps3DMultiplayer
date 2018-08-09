@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\HostGame.cs" />
     <Compile Include="Assets\Import\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\Import\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\Import\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
@@ -83,7 +82,6 @@
     <Compile Include="Assets\Import\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\Import\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
     <Compile Include="Assets\Import\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
-    <Compile Include="Assets\Import\Standard Assets\Utility\ActivateTrigger.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\AlphaButtonClickMask.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\AutoMoveAndRotate.cs" />
@@ -93,21 +91,20 @@
     <Compile Include="Assets\Import\Standard Assets\Utility\DynamicShadowSettings.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\EventSystemChecker.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\FollowTarget.cs" />
-    <Compile Include="Assets\Import\Standard Assets\Utility\ForcedReset.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\FOVKick.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\LerpControlledBob.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\ObjectResetter.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\PlatformSpecificContent.cs" />
-    <Compile Include="Assets\Import\Standard Assets\Utility\SimpleActivatorMenu.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\SimpleMouseRotator.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\SmoothFollow.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\TimedObjectActivator.cs" />
-    <Compile Include="Assets\Import\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointProgressTracker.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\HostGame.cs" />
+    <Compile Include="Assets\Scripts\JoinGame.cs" />
     <Compile Include="Assets\Scripts\MatchSetting.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
