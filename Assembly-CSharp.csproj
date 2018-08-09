@@ -102,6 +102,8 @@
     <Compile Include="Assets\Import\Standard Assets\Utility\TimedObjectActivator.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <Compile Include="Assets\JoinRoomButton.cs" />
+    <Compile Include="Assets\PauseMenuUI.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HostGame.cs" />
     <Compile Include="Assets\Scripts\JoinGame.cs" />

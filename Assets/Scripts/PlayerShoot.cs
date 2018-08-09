@@ -20,6 +20,8 @@ public class PlayerShoot : NetworkBehaviour {
     {
         if (!isLocalPlayer)
             return;
+        if (PauseMenuUI.isActive)
+            return;
         currentWeapon = weaponManager.GetCurrentWeapon();
         if (Input.GetButtonDown("Fire1"))
             InvokeRepeating("Shoot", 0f, 60f / currentWeapon.fireRate);

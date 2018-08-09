@@ -1,17 +1,13 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking.Match;
+using System;
 
 public class HostGame : MonoBehaviour { // this script doesn't need networkbehavior because it needs nothing by this class
 
     private uint maxPlayerOnRoom = 5;
     private string roomName;
-
-    private void Start()
-    {
-        if (NetworkManager.singleton.matchMaker == null)
-            NetworkManager.singleton.StartMatchMaker();
-    }
 
     public void SetRoomName(string name)
     {
@@ -26,8 +22,12 @@ public class HostGame : MonoBehaviour { // this script doesn't need networkbehav
 
     public void CreateRoom()
     {
+        Debug.Log("create room called");
         if (roomName == null)
             roomName = "Default Room";
+        if (NetworkManager.singleton.matchMaker == null)
+            NetworkManager.singleton.StartMatchMaker();
         NetworkManager.singleton.matchMaker.CreateMatch(roomName, maxPlayerOnRoom, true, "", "", "", 0, 0, NetworkManager.singleton.OnMatchCreate);
     }
+
 }

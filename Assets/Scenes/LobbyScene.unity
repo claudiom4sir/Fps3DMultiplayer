@@ -518,7 +518,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1177720338}
+      - m_Target: {fileID: 114872990364144322, guid: 766268aa768ad71449b50146205454ba,
+          type: 2}
         m_MethodName: CreateRoom
         m_Mode: 1
         m_Arguments:
@@ -888,7 +889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 184.45001, y: 0.000015258789}
+  m_AnchoredPosition: {x: 184.45001, y: 0}
   m_SizeDelta: {x: 360.1, y: -0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &871924031
@@ -1248,7 +1249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -243.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1247115875
@@ -1362,7 +1363,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2083704872}
+      - m_Target: {fileID: 114390244301735914, guid: 766268aa768ad71449b50146205454ba,
+          type: 2}
         m_MethodName: RefreshRoomList
         m_Mode: 1
         m_Arguments:
@@ -1530,12 +1532,6 @@ Prefab:
       propertyPath: roomListContent
       value: 
       objectReference: {fileID: 1247115874}
-    - target: {fileID: 114390244301735914, guid: 766268aa768ad71449b50146205454ba,
-        type: 2}
-      propertyPath: matchInfoPrefab
-      value: 
-      objectReference: {fileID: 1861935128539546, guid: 8f175896b57f39d47b07297fcd3d3cc6,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 766268aa768ad71449b50146205454ba, type: 2}
   m_IsPrefabAsset: 0
@@ -1574,7 +1570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.531175}
   m_AnchorMax: {x: 0.5, y: 0.531175}
-  m_AnchoredPosition: {x: 0, y: 0.19999981}
+  m_AnchoredPosition: {x: 0, y: 0.20000076}
   m_SizeDelta: {x: 304.6, y: 243.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1514748303
@@ -1786,12 +1782,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1969333116}
   m_CullTransparentMesh: 0
---- !u!114 &2083704872 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114390244301735914, guid: 766268aa768ad71449b50146205454ba,
-    type: 2}
-  m_PrefabInternal: {fileID: 1389544371}
-  m_Script: {fileID: 11500000, guid: 359b757ff9cf17b44a591cc10128d9b2, type: 3}
 --- !u!1 &2125841832
 GameObject:
   m_ObjectHideFlags: 0

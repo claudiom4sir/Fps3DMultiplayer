@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        if (PauseMenuUI.isActive)
+            return;
         // calculate the moviment on the x (right, left) and/or z (forward, backwards)
         // with directional keys or moviment's keys (a,w,s,d)
         float xMoviment = Input.GetAxis("Horizontal");
