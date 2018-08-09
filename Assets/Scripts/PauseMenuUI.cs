@@ -4,7 +4,7 @@ using UnityEngine.Networking.Match;
 
 public class PauseMenuUI : MonoBehaviour {
 
-    public static bool isActive = false;
+    public static bool isActive = false; // if this variable is true, player can't do movement and shoot
 
     public void LeaveRoom()
     {

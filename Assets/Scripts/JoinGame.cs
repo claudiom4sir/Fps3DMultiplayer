@@ -4,22 +4,40 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Networking.Match;
 using System;
+using UnityEngine.SceneManagement;
 
 public class JoinGame : MonoBehaviour {
 
     private List<GameObject> roomList = new List<GameObject>();
     public Transform roomListContent;
     public GameObject matchInfoPrefab;
+    private double refreshTime = 5f;
 
     private void Start()
     {
         RefreshRoomList();
     }
 
+    private void Update() // if we are in LobbyScene, Update is used to refresh the roomList every 5 seconds
+    {
+        Scene actualScene = SceneManager.GetActiveScene();
+        if(actualScene.buildIndex == 0) // 0 is the current index for LobbyScene
+        {
+            refreshTime = refreshTime - Time.deltaTime;
+            if(refreshTime <= 0f)
+            {
+                refreshTime = 5f;
+                RefreshRoomList();
+            }
+        }
+    }
+
     public void RefreshRoomList()
     {
         if (NetworkManager.singleton.matchMaker == null)
             NetworkManager.singleton.StartMatchMaker();
+        if (roomListContent == null)
+            roomListContent = GameObject.FindGameObjectWithTag("Room List Content").transform; // used for fixing one bug
         NetworkManager.singleton.matchMaker.ListMatches(0, 20, "", false, 0, 0, OnMatchList);
     }
 
@@ -47,13 +65,13 @@ public class JoinGame : MonoBehaviour {
         }
     }
 
-    private void ClearRoomList() // before it remove the buttons that rappresents the room in game, and than it clears the list of rooms
+    private void ClearRoomList() // before it removes the buttons that rappresents the room in game, and than it clears the list of rooms
     {
         foreach (GameObject go in roomList)
         {
             Destroy(go);
-            roomList.Remove(go);
         }
+        roomList.Clear();
     }
 
 }

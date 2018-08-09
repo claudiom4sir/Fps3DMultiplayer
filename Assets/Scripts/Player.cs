@@ -10,7 +10,7 @@ public class Player : NetworkBehaviour {
     public GameObject[] goToDisableOnDeath;
     public GameObject deathEffect;
 
-    [SyncVar] // used for change this value in every clients that are connected with the server 
+    [SyncVar]   // used for change this value in every clients that are connected with the server 
     private int currentHeath;
     [SyncVar]
     private bool isDead = false;

@@ -55,7 +55,7 @@ public class PlayerMotor : MonoBehaviour {
 
     private void FixedUpdate() // used instead Update because it's controlled by Phisics Engine
     {
-        // used for set an offset for don't allow the player to touch the horizontals surfaces
+        // used for set an offset for don't allow the player to touch horizontals surfaces
         RaycastHit hit;
         if (Physics.Raycast(rb.position, Vector3.down, out hit))
             configurableJoint.targetPosition = new Vector3(0f, -hit.point.y, 0f); 
@@ -90,8 +90,9 @@ public class PlayerMotor : MonoBehaviour {
     {
         if (cameraRotation == Vector3.zero)
             return;
-        cam.transform.localEulerAngles = cameraRotation; // if rotation is already equals to the limit, nothing happens
-        // localEulerAngles rotates on the x axis the camera, where up rotation is negative x and down rotation is positive x
+        cam.transform.localEulerAngles = cameraRotation;    // if rotation is already equals to the limit, nothing happens
+                                                            // localEulerAngles rotates on the x axis the camera, where up 
+                                                            // rotation is negative x and down rotation is positive x
     }
 
     private void DoFlight()

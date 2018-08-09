@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
 
     private PlayerMotor motor;
 
-
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
@@ -40,8 +39,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 verticalMoviment = transform.forward * zMoviment;
         Vector3 velocity = (horizontalMoviment + verticalMoviment) * speed;
 
-        // apply the moviment
-        motor.Move(velocity, zMoviment);
+        motor.Move(velocity, zMoviment);    // apply the moviment
 
         // calculate the rotation moviment with mouse
         float yRotation = Input.GetAxis("Mouse X"); // when you move mouse left or right, we have to rotate on the Y axis
@@ -49,9 +47,8 @@ public class PlayerController : MonoBehaviour {
         float xRotation = Input.GetAxis("Mouse Y");
         Vector3 rotationOnX = new Vector3(xRotation, 0f, 0f) * lookSensibility;
 
-        // apply the rotation
-        motor.Rotate(rotationOnY);
-        motor.RotateCamera(rotationOnX);
+        motor.Rotate(rotationOnY);  // apply the rotation
+        motor.RotateCamera(rotationOnX);    // apply camera rotation
 
         // calculate jump force
         Vector3 _thrustForce = Vector3.zero;
@@ -69,8 +66,7 @@ public class PlayerController : MonoBehaviour {
             currentThrusterFuel = Mathf.Clamp(fuel, 0f, 1f);
         }
         
-        // apply the thrust force for to fly
-        motor.Fly(_thrustForce); // player can fly with a thrust equals to thrustForce
+        motor.Fly(_thrustForce); // apply the thrust force for to fly - player can fly with a force equals to thrustForce
     }
 
 }

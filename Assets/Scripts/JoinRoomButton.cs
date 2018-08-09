@@ -18,7 +18,7 @@ public class JoinRoomButton : MonoBehaviour {
         SetText();
     }
 
-    private void SetText() // used for setting the text of the button
+    private void SetText()  // used for setting the text of the button
     {
         text = GetComponentInChildren<Text>();
         if (text == null)

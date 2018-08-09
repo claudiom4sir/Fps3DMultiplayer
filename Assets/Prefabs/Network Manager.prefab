@@ -62,7 +62,7 @@ MonoBehaviour:
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
-  m_LogLevel: 2
+  m_LogLevel: 1
   m_PlayerPrefab: {fileID: 1101775295170502, guid: 88d158e0205720540a88e0aed142046f,
     type: 2}
   m_AutoCreatePlayer: 1
@@ -139,6 +139,7 @@ MonoBehaviour:
   roomListContent: {fileID: 0}
   matchInfoPrefab: {fileID: 1861935128539546, guid: 8f175896b57f39d47b07297fcd3d3cc6,
     type: 2}
+  refreshTime: 5
 --- !u!114 &114872990364144322
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,12 +19,12 @@ public class PlayerSetup : NetworkBehaviour {
     {
         if (!isLocalPlayer)
         {
-            DisableComponents(); // these components are disabled because, in this mode, it's not possible to control another player
+            DisableComponents();    // these components are disabled because, in this mode, it's not possible to control another player
             AssigneRemotePlayerLayer();
         }
         else
         { 
-            SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER)); // NameToLayer give an index from the string layer
+            SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER));   // NameToLayer give an index from the string layer
             CreateUI(); // only local player has a playerUI
             player.PlayerSetup();
         }
@@ -46,7 +46,7 @@ public class PlayerSetup : NetworkBehaviour {
         return playerUIInstance;
     }
 
-    // this method sets the layer of all compoments in graphic for don't be rendered by the camera
+    // this method sets the layer of all components in graphic for don't be rendered by the camera
     private void SetAllLayer(GameObject graphic, int layerIndex)
     {
         graphic.layer = layerIndex;
@@ -57,7 +57,7 @@ public class PlayerSetup : NetworkBehaviour {
     public override void OnStartClient()
     {
         base.OnStartClient();
-        SetPlayerName(); // it called here because OnStartClient() will be called before Start()
+        SetPlayerName();    // it called here because OnStartClient() will be called before Start()
         string playerID = GetPlayerName();
         player = GetComponent<Player>();
         GameManager.RegisterPlayer(playerID, player);
@@ -74,7 +74,7 @@ public class PlayerSetup : NetworkBehaviour {
         return gameObject.name;
     }
 
-    private void OnDisable() // when this player will be destroyed, the main camera will be activated
+    private void OnDisable()    // when this player will be destroyed, the main camera will be activated
     {
         if(isLocalPlayer)
             GameManager.singleton.SetCameraState(true);
@@ -87,7 +87,7 @@ public class PlayerSetup : NetworkBehaviour {
         gameObject.layer = LayerMask.NameToLayer(REMOTEPLAYERLAYER);
     }
 
-    private void DisableComponents() // it disable all components in the list
+    private void DisableComponents()    // it disable all components in the list
     {
         foreach (Behaviour _componentsToDisable in componentsToDisable)
             _componentsToDisable.enabled = false;
