@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Database Control Free\Demos\C#\Scripts\DBManager.cs" />
     <Compile Include="Assets\Import\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\Import\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\Import\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
@@ -117,11 +118,15 @@
     <Compile Include="Assets\Scripts\PlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\WeaponGraphic.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
+    <Compile Include="Assets\UserAccountManager.cs" />
     <None Include="Assets\Import\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+    <None Include="Assets\Database Control Free\Demos\UnityScript\Readme.txt" />
+    <None Include="Assets\Editor Default Resources\Database Control Free\DCF_EditorData.txt" />
     <None Include="Assets\Import\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\Import\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
     <None Include="Assets\Import\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Import\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
+    <None Include="Assets\Database Control Free\Resources\DCF_RuntimeData.txt" />
     <None Include="Assets\Import\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Claudio/Documents/GitHub/Fps3DMultiplayer/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
@@ -329,6 +334,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="DatabaseControl">
+      <HintPath>C:/Users/Claudio/Documents/GitHub/Fps3DMultiplayer/Assets/Database Control Free/Scripts/DatabaseControl.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Claudio/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
