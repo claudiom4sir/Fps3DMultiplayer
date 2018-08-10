@@ -23,9 +23,11 @@ public class Player : NetworkBehaviour {
             RpcTakeDamage(200);
     }
 
+    #region("Setup methods")
     public void PlayerSetup()
     {
-        CmdBroadCastPlayerSetup();
+        if(isLocalPlayer)
+            CmdBroadCastPlayerSetup();
     }
 
     [Command]
@@ -64,7 +66,21 @@ public class Player : NetworkBehaviour {
         if (collider != null)
             collider.enabled = true;
     }
+    #endregion
 
+
+    [ClientRpc] // this attribute says that this method will be called on clients from the server
+    public void RpcTakeDamage(int damage)
+    {
+        if (isDead)
+            return;
+        currentHeath = currentHeath - damage;
+        if (currentHeath <= 0 && isLocalPlayer) // Die method only invoked by local player who died;
+            CmdDie();
+        Debug.Log(name + "now have " + currentHeath + "health");
+    }
+
+    #region("Die Methods")
     public bool IsDead()
     {
         return isDead;
@@ -75,15 +91,16 @@ public class Player : NetworkBehaviour {
         isDead = value;
     }
 
-    [ClientRpc] // this attribute says that this method will be called on clients from the server
-    public void RpcTakeDamage(int damage)
+    [Command]
+    private void CmdDie()
     {
-        if (isDead)
-            return;
-        currentHeath = currentHeath - damage;
-        if (currentHeath <= 0)
-            Die();
-        Debug.Log(name + "now have " + currentHeath + "health");
+        RpcDie();
+    }
+
+    [ClientRpc]
+    private void RpcDie()
+    {
+        Die();
     }
 
     private void Die()
@@ -102,6 +119,9 @@ public class Player : NetworkBehaviour {
         if (collider != null)
             collider.enabled = false;
         GameObject _deathEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Transform startPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = startPoint.position;
+        transform.rotation = startPoint.rotation;
         Destroy(_deathEffect, 2f);
         StartCoroutine(Respown()); // it respawns the player
     }
@@ -109,11 +129,11 @@ public class Player : NetworkBehaviour {
     private IEnumerator Respown() // wait fews seconds and start the procedure for respawn
     {
         yield return new WaitForSeconds(GameManager.singleton.matchSetting.respawnTime);
-        Transform startPoint = NetworkManager.singleton.GetStartPosition();
-        transform.position = startPoint.position;
-        transform.rotation = startPoint.rotation;
         PlayerSetup(); // not PlayerSetup() because it is already executed one time, when local player borns
         Debug.Log(gameObject.name + "respawned");
     }
+    #endregion
+
+    
 
 }
