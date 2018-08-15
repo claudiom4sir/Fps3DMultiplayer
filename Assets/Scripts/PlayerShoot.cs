@@ -65,16 +65,16 @@ public class PlayerShoot : NetworkBehaviour {
         {
             CmdOnHit(hit.point, hit.normal); // call this method with the point hitten and the perpendicular vector of this point
             if (hit.collider.tag == PLAYERTAG)
-                CmdPlayerShoot(hit.collider.name, currentWeapon.damage);
+                CmdPlayerShoot(hit.collider.name, currentWeapon.damage, gameObject.name);
         }
     }
 
     [Command] // it is used for say that this method will be invoked only on the server by clients
-    private void CmdPlayerShoot(string playerID, int damage)
+    private void CmdPlayerShoot(string playerID, int damage, string whoShootsID)
     {
         Debug.Log(playerID + "hit!");
         Player player = GameManager.GetPlayer(playerID);
-        player.RpcTakeDamage(damage);
+        player.RpcTakeDamage(damage, whoShootsID);
     }
 
 }

@@ -14,14 +14,11 @@ public class Player : NetworkBehaviour {
     private int currentHeath;
     [SyncVar]
     private bool isDead = false;
+    public int kills;
+    public int deaths;
+
     private bool[] wasEnabled;
     private bool isFirstSetup = true;
-
-    private void Update() // used for testing 
-    {
-        if (Input.GetKey(KeyCode.K))
-            RpcTakeDamage(200);
-    }
 
     #region("Setup methods")
     public void PlayerSetup()
@@ -70,13 +67,13 @@ public class Player : NetworkBehaviour {
 
 
     [ClientRpc] // this attribute says that this method will be called on clients from the server
-    public void RpcTakeDamage(int damage)
+    public void RpcTakeDamage(int damage, string whoShootsID)
     {
         if (isDead)
             return;
         currentHeath = currentHeath - damage;
         if (currentHeath <= 0 && isLocalPlayer) // Die method only invoked by local player who died;
-            CmdDie();
+            CmdDie(whoShootsID);
         Debug.Log(name + "now have " + currentHeath + "health");
     }
 
@@ -92,20 +89,22 @@ public class Player : NetworkBehaviour {
     }
 
     [Command]
-    private void CmdDie()
+    private void CmdDie(string whoShootsID)
     {
-        RpcDie();
+        RpcDie(whoShootsID);
     }
 
     [ClientRpc]
-    private void RpcDie()
+    private void RpcDie(string whoShootsID)
     {
-        Die();
+        Die(whoShootsID);
     }
 
-    private void Die()
+    private void Die(string whoShootsID)
     {
         isDead = true;
+        deaths++;
+        GameManager.GetPlayer(whoShootsID).kills++;
         if (isLocalPlayer)
         {
             GameManager.singleton.SetCameraState(true);

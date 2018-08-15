@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114153442938703526}
   - component: {fileID: 114544651896271956}
   - component: {fileID: 114785677879875356}
+  - component: {fileID: 114834717904168542}
   - component: {fileID: 114861470989332192}
   - component: {fileID: 114022401503193822}
   - component: {fileID: 114256945695217516}
@@ -947,6 +948,7 @@ MonoBehaviour:
   - {fileID: 81849873350290656}
   - {fileID: 95742281659897214}
   - {fileID: 20449859962651186}
+  - {fileID: 114834717904168542}
   playerGraphic: {fileID: 1512137412789040}
   playerUI: {fileID: 1598903852603600, guid: d8f72afe9f9ae394dbd70e657e0d6209, type: 2}
 --- !u!114 &114544651896271956
@@ -1007,6 +1009,20 @@ MonoBehaviour:
   - {fileID: 1722445814171270}
   deathEffect: {fileID: 1760756599188792, guid: 63b8ec2b2987dfa49bdb82165f8547dc,
     type: 2}
+  kills: 0
+  deaths: 0
+--- !u!114 &114834717904168542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101775295170502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac94c5c0f4d753b4684b94f58f7ee71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncTime: 10
 --- !u!114 &114861470989332192
 MonoBehaviour:
   m_ObjectHideFlags: 1

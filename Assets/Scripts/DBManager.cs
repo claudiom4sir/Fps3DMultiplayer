@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using DatabaseControl; // << Remember to add this reference to your scripts which use DatabaseControl
 
+// this script is not made by me!
 public class DBManager : MonoBehaviour {
 
     //All public variables bellow are assigned in the Inspector
