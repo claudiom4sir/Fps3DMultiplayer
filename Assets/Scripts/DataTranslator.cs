@@ -1,15 +1,37 @@
-﻿// this class was maked for support the translation between data from the game and data from database
-public class DataTranslator {
+﻿using UnityEngine;
+// this class was maked for support the translation between data in game format and database format
+public class DataTranslator  {
 
-    public static string[] ForGetting(string data) // this is a support method used for parse the data receved by database
+    public static string GetInfo(string s, string tag)
     {
-        string[] info = data.Split('/');
-        return info;
+        string[] data = s.Split('/');
+        foreach (string str in data)
+            if (str.StartsWith(tag))
+            {
+                string[] str1 = str.Split(' ');
+                return str1[1];
+            }
+        Debug.Log("tag " + tag + " doesn't exist");
+        return "";
     }
 
-    public static string ForSetting(string[] data) // it is used for translatting from the game data format to database data format
+    public static string IncreaseStats(string s, string tag) // it is used for translatting from the game data format to database data format
     {
-        return null;
+        string[] str = s.Split('/');
+        string finalString = "";
+        for (int i = 0; i < str.Length; i++)
+        {
+            if (str[i].StartsWith(tag))
+            {
+                int x = int.Parse(str[i].Split(' ')[1]) + 1; // x has the value increased by 1
+                finalString = finalString + tag + " " + x;
+            }
+            else
+                finalString = finalString + str[i];
+            if (i < str.Length - 1)
+                finalString = finalString + "/";
+        }
+        return finalString;
     }
 
 }

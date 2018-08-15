@@ -3278,6 +3278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3cec0727d4d434cb2a864d454a7ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: 
+  isLoggedIn: 0
   loginScene: LobbyScene
   logoutScene: LoginScene
 --- !u!4 &2084992711

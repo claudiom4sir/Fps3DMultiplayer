@@ -18,9 +18,8 @@ public class UserAccount : MonoBehaviour {
 
     public void OnDataReceived(string data)
     {
-        string[] info = DataTranslator.ForGetting(data); // this method translate the data from the database to wanted format for showing data
-        kills.text = info[0];
-        deaths.text = info[1];
+        kills.text = "Kills: " + DataTranslator.GetInfo(data, "[KILLS]");
+        deaths.text = "Deaths: " + DataTranslator.GetInfo(data, "[DEATHS]");
     }
 
     public void Logout()
