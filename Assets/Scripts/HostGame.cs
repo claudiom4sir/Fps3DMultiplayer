@@ -31,10 +31,4 @@ public class HostGame : MonoBehaviour { // this script doesn't need networkbehav
         NetworkManager.singleton.matchMaker.CreateMatch(roomName, maxPlayerOnRoom, true, "", "", "", 0, 0, NetworkManager.singleton.OnMatchCreate);
     }
 
-    public void Quit()
-    {
-        Debug.Log("Quitting from the application");
-        Application.Quit();
-    }
-
 }

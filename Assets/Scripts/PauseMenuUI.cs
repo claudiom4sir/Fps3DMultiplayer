@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuUI : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class PauseMenuUI : MonoBehaviour {
         NetworkManager.singleton.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, NetworkManager.singleton.OnDropConnection);
         NetworkManager.singleton.StopHost();
         PauseMenuUI.isActive = false;
+        SceneManager.LoadScene("LobbyScene");
     }
 
 	

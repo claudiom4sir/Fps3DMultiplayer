@@ -23,9 +23,6 @@ public class DBManager : MonoBehaviour {
     public Text Login_ErrorText;
     public Text Register_ErrorText;
 
-    //This UI Text displays the username once logged in. It shows it in the form "Logged In As: " + username
-    public Text LoggedIn_DisplayUsernameText;
-
     //These store the username and password of the player when they have logged in
     private string playerUsername = "";
     private string playerPassword = "";
@@ -47,7 +44,6 @@ public class DBManager : MonoBehaviour {
         Register_ConfirmPasswordField.text = "";
         Login_ErrorText.text = "";
         Register_ErrorText.text = "";
-        LoggedIn_DisplayUsernameText.text = "";
     }
 
     //Called by Button Pressed Methods. These use DatabaseControl namespace to communicate with server.
@@ -65,7 +61,6 @@ public class DBManager : MonoBehaviour {
             //Username and Password were correct. Stop showing 'Loading...' and show the LoggedIn UI. And set the text to display the username.
             ResetAllUIElements();
             loadingParent.gameObject.SetActive(false);
-            LoggedIn_DisplayUsernameText.text = "Logged In As: " + playerUsername;
             UserAccountManager.singleton.LogIn(playerUsername, playerPassword);
         } else
         {
@@ -92,7 +87,7 @@ public class DBManager : MonoBehaviour {
     }
     IEnumerator RegisterUser()
     {
-        IEnumerator e = DCF.RegisterUser(playerUsername, playerPassword, "Hello World"); // << Send request to register a new user, providing submitted username and password. It also provides an initial value for the data string on the account, which is "Hello World".
+        IEnumerator e = DCF.RegisterUser(playerUsername, playerPassword, "KILLS 0/DEATHS 0"); // << Send request to register a new user, providing submitted username and password. It also provides an initial value for the data string on the account, which is "Hello World".
         while (e.MoveNext())
         {
             yield return e.Current;
@@ -104,7 +99,6 @@ public class DBManager : MonoBehaviour {
             //Username and Password were valid. Account has been created. Stop showing 'Loading...' and show the loggedIn UI and set text to display the username.
             ResetAllUIElements();
             loadingParent.gameObject.SetActive(false);
-            LoggedIn_DisplayUsernameText.text = "Logged In As: " + playerUsername;
             UserAccountManager.singleton.LogIn(playerUsername, playerPassword);
         } else
         {
@@ -120,59 +114,6 @@ public class DBManager : MonoBehaviour {
                 //There was another error. This error message should never appear, but is here just in case.
                 Login_ErrorText.text = "Error: Unknown Error. Please try again later.";
             }
-        }
-    }
-    IEnumerator GetData ()
-    {
-        IEnumerator e = DCF.GetUserData(playerUsername, playerPassword); // << Send request to get the player's data string. Provides the username and password
-        while (e.MoveNext())
-        {
-            yield return e.Current;
-        }
-        string response = e.Current as string; // << The returned string from the request
-
-        if (response == "Error")
-        {
-            //There was another error. Automatically logs player out. This error message should never appear, but is here just in case.
-            ResetAllUIElements();
-            playerUsername = "";
-            playerPassword = "";
-            loginParent.gameObject.SetActive(true);
-            loadingParent.gameObject.SetActive(false);
-            Login_ErrorText.text = "Error: Unknown Error. Please try again later.";
-        }
-        else
-        {
-            //The player's data was retrieved. Goes back to loggedIn UI and displays the retrieved data in the InputField
-            loadingParent.gameObject.SetActive(false);
-            loggedInParent.gameObject.SetActive(true);
-            LoggedIn_DataOutputField.text = response;
-        }
-    }
-    IEnumerator SetData (string data)
-    {
-        IEnumerator e = DCF.SetUserData(playerUsername, playerPassword, data); // << Send request to set the player's data string. Provides the username, password and new data string
-        while (e.MoveNext())
-        {
-            yield return e.Current;
-        }
-        string response = e.Current as string; // << The returned string from the request
-
-        if (response == "Success")
-        {
-            //The data string was set correctly. Goes back to LoggedIn UI
-            loadingParent.gameObject.SetActive(false);
-            loggedInParent.gameObject.SetActive(true);
-        }
-        else
-        {
-            //There was another error. Automatically logs player out. This error message should never appear, but is here just in case.
-            ResetAllUIElements();
-            playerUsername = "";
-            playerPassword = "";
-            loginParent.gameObject.SetActive(true);
-            loadingParent.gameObject.SetActive(false);
-            Login_ErrorText.text = "Error: Unknown Error. Please try again later.";
         }
     }
 
@@ -260,20 +201,7 @@ public class DBManager : MonoBehaviour {
         loginParent.gameObject.SetActive(true);
         registerParent.gameObject.SetActive(false);
     }
-    public void LoggedIn_SaveDataButtonPressed ()
-    {
-        //Called when the player hits 'Set Data' to change the data string on their account. Switches UI to 'Loading...' and starts coroutine to set the players data string on the server
-        loadingParent.gameObject.SetActive(true);
-        loggedInParent.gameObject.SetActive(false);
-        StartCoroutine(SetData(LoggedIn_DataInputField.text));
-    }
-    public void LoggedIn_LoadDataButtonPressed ()
-    {
-        //Called when the player hits 'Get Data' to retrieve the data string on their account. Switches UI to 'Loading...' and starts coroutine to get the players data string from the server
-        loadingParent.gameObject.SetActive(true);
-        loggedInParent.gameObject.SetActive(false);
-        StartCoroutine(GetData());
-    }
+    
     public void LoggedIn_LogoutButtonPressed ()
     {
         //Called when the player hits the 'Logout' button. Switches back to Login UI and forgets the player's username and password.

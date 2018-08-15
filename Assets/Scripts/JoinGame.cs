@@ -21,7 +21,7 @@ public class JoinGame : MonoBehaviour {
     private void Update() // if we are in LobbyScene, Update is used to refresh the roomList every 5 seconds
     {
         Scene actualScene = SceneManager.GetActiveScene();
-        if(actualScene.buildIndex == 0) // 0 is the current index for LobbyScene
+        if(actualScene.name.Equals("LobbyScene")) // the name of the lobby scene
         {
             refreshTime = refreshTime - Time.deltaTime;
             if(refreshTime <= 0f)
