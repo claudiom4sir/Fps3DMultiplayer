@@ -43,7 +43,7 @@ public class PlayerMotor : MonoBehaviour {
 
     public void RotateCamera(Vector3 _cameraRotation) // used also for check that the angle of camera's rotation is not out of range
     {
-        cameraRotation = cameraRotation - _cameraRotation * Time.fixedDeltaTime; // is x is positive, the rotation goes down and if is negative, the rotation goes up
+        cameraRotation = cameraRotation - _cameraRotation * Time.fixedDeltaTime; // if x is positive, the rotation goes down and if is negative, the rotation goes up
         float x = Mathf.Clamp(cameraRotation.x, -cameraRotationAngleLimit, cameraRotationAngleLimit);
         cameraRotation = new Vector3(x, 0f, 0f);
     }
@@ -65,6 +65,14 @@ public class PlayerMotor : MonoBehaviour {
         DoRotation();
         DoCamRotation();
         DoFlight();
+        ResetVector(); // used because if pausemenuUI is active, player still continues to move
+    }
+
+    private void ResetVector()
+    {
+        velocity = Vector3.zero;
+        rotation = Vector3.zero;
+        thrustForce = Vector3.zero;
     }
 
     private void AnimateThrusters()

@@ -222,7 +222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.011293, y: 0}
+  m_AnchoredPosition: {x: -0.011291504, y: 0}
   m_SizeDelta: {x: 0.022583, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &88319828
@@ -379,7 +379,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'Kills: Loading...'
 --- !u!222 &226781489
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -702,8 +702,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114872990364144322, guid: 766268aa768ad71449b50146205454ba,
-          type: 2}
+      - m_Target: {fileID: 783667540}
         m_MethodName: CreateRoom
         m_Mode: 1
         m_Arguments:
@@ -820,6 +819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536189142}
+  - component: {fileID: 536189143}
   m_Layer: 5
   m_Name: Join Game
   m_TagString: Untagged
@@ -848,6 +848,20 @@ RectTransform:
   m_AnchoredPosition: {x: 204.29999, y: -384}
   m_SizeDelta: {x: 408.6, y: 768}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &536189143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 536189141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359b757ff9cf17b44a591cc10128d9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomListContent: {fileID: 1247115874}
+  matchInfoPrefab: {fileID: 1861935128539546, guid: 8f175896b57f39d47b07297fcd3d3cc6,
+    type: 2}
 --- !u!1 &588008175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783667539}
+  - component: {fileID: 783667540}
   m_Layer: 5
   m_Name: Host Game
   m_TagString: Untagged
@@ -1076,6 +1091,17 @@ RectTransform:
   m_AnchoredPosition: {x: 573.5, y: -384}
   m_SizeDelta: {x: 329.8, y: 768}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &783667540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783667538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd2cb6fb34558614098d419123e7dde4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &871924031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,8 +1932,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114390244301735914, guid: 766268aa768ad71449b50146205454ba,
-          type: 2}
+      - m_Target: {fileID: 536189143}
         m_MethodName: RefreshRoomList
         m_Mode: 1
         m_Arguments:
@@ -2070,11 +2095,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114390244301735914, guid: 766268aa768ad71449b50146205454ba,
-        type: 2}
-      propertyPath: roomListContent
-      value: 
-      objectReference: {fileID: 1247115874}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 766268aa768ad71449b50146205454ba, type: 2}
   m_IsPrefabAsset: 0
@@ -2524,7 +2544,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'Deaths: Loading...'
 --- !u!222 &2015831232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2637,10 +2657,9 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114872990364144322, guid: 766268aa768ad71449b50146205454ba,
-          type: 2}
+      - m_Target: {fileID: 783667540}
         m_MethodName: SetRoomName
-        m_Mode: 0
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

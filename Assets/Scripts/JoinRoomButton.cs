@@ -8,10 +8,6 @@ public class JoinRoomButton : MonoBehaviour {
     private MatchInfoSnapshot matchInfo;
     private Text text;
 
-    private void Start()
-    {
-    }
-
     public void SetMatch(MatchInfoSnapshot match)
     {
         matchInfo = match;
@@ -29,5 +25,6 @@ public class JoinRoomButton : MonoBehaviour {
     public void JoinRoom()
     {
         NetworkManager.singleton.matchMaker.JoinMatch(matchInfo.networkId, "", "", "", 0, 0, NetworkManager.singleton.OnMatchJoined);
+        text.text = "Joining";
     }
 }
