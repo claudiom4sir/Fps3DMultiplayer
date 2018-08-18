@@ -6,6 +6,7 @@ public class PlayerUI : MonoBehaviour {
     public Image fuelBar;
     public PlayerController playerController;
     public GameObject pauseMenuUI;
+    public GameObject scoreboardUI;
 
     private void Update()
     {
@@ -13,6 +14,10 @@ public class PlayerUI : MonoBehaviour {
         SetFuelBar(fuel);
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePauseMenuUI();
+        if (Input.GetKeyDown(KeyCode.Tab))
+            scoreboardUI.SetActive(true);
+        else if (Input.GetKeyUp(KeyCode.Tab))
+            scoreboardUI.SetActive(false);
     }
 
     public void TogglePauseMenuUI()

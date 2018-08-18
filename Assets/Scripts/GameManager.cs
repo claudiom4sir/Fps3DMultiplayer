@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
@@ -37,15 +38,22 @@ public class GameManager : MonoBehaviour {
         return players[playerID];
     }
 
-    private void OnGUI()
+    public static Player[] GetPlayers()
     {
-        GUILayout.BeginArea(new Rect(200, 200, 200, 500));
-        GUILayout.BeginVertical();
-        foreach (string id in players.Keys)
-            GUILayout.Label(id + " - " + GetPlayer(id).name);
-        GUILayout.EndVertical();
-        GUILayout.EndArea();
+        return players.Values.ToArray();
     }
+
+    //private void OnGUI()
+    //{
+    //    GUILayout.BeginArea(new Rect(200, 200, 200, 500));
+    //    GUILayout.BeginVertical();
+    //    foreach (string id in players.Keys)
+    //        GUILayout.Label(id + " - " + GetPlayer(id).name);
+    //    GUILayout.EndVertical();
+    //    GUILayout.EndArea();
+    //}
+
+
     #endregion
 
 }

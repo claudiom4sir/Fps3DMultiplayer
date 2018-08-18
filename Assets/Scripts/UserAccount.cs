@@ -18,6 +18,8 @@ public class UserAccount : MonoBehaviour {
 
     public void OnDataReceived(string data)
     {
+        if (username == null || kills == null || deaths == null)
+            return;
         kills.text = "Kills: " + DataTranslator.GetInfo(data, "[KILLS]");
         deaths.text = "Deaths: " + DataTranslator.GetInfo(data, "[DEATHS]");
     }
