@@ -14,7 +14,12 @@ public class Player : NetworkBehaviour {
     private int currentHeath;
     [SyncVar]
     private bool isDead = false;
+
+    [SyncVar]
+    public string username;
+    [SyncVar]
     public int kills;
+    [SyncVar]
     public int deaths;
 
     private bool[] wasEnabled;
@@ -23,13 +28,24 @@ public class Player : NetworkBehaviour {
     #region("Setup methods")
     public void PlayerSetup()
     {
-        if(isLocalPlayer)
+        if (isLocalPlayer)
+        {
             CmdBroadCastPlayerSetup();
+        }
+    }
+
+    [Command]
+    public void CmdUpdateScore(int _kills, int _deaths)
+    {
+        kills = _kills;
+        deaths = _deaths;
     }
 
     [Command]
     private void CmdBroadCastPlayerSetup()
     {
+        if (UserAccountManager.singleton.isLoggedIn)
+            username = UserAccountManager.singleton.username;
         RpcPlayerSetupInAllClients();
     }
 
@@ -105,6 +121,7 @@ public class Player : NetworkBehaviour {
         isDead = true;
         deaths++;
         GameManager.GetPlayer(whoShootsID).kills++;
+        Debug.Log(deaths + " " + kills);
         if (isLocalPlayer)
         {
             GameManager.singleton.SetCameraState(true);

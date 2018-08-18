@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
-public class PlayerScore : MonoBehaviour {
+public class PlayerScore : NetworkBehaviour {
 
     private Player player;
     public float syncTime = 10f;
@@ -11,7 +12,8 @@ public class PlayerScore : MonoBehaviour {
     {
         player = GetComponent<Player>();
         SyncScore();
-        StartCoroutine(SendStatsData());
+        if(isLocalPlayer) // only localplayer can sync his stats
+            StartCoroutine(SendStatsData());
     }
 
     private IEnumerator SendStatsData() // used for send data to the server every syncTime seconds
@@ -33,20 +35,19 @@ public class PlayerScore : MonoBehaviour {
     private void OnDestroy() // if gameobject will be destroy, before this it send his data
     {
         if(player != null)
-        SendStatsDataNow();
+            SendStatsDataNow();
     }
 
     private void SyncScore()
     {
         if (UserAccountManager.singleton.isLoggedIn)
-        {
             UserAccountManager.singleton.GetData(OnDataReceived);
-        }
     }
 
     private void OnDataReceived(string data)
     {
-        player.kills = DataTranslator.GetInfo(data, "[KILLS]");
-        player.deaths = DataTranslator.GetInfo(data, "[DEATHS]");
+        int kills = DataTranslator.GetInfo(data, "[KILLS]");
+        int deaths = DataTranslator.GetInfo(data, "[DEATHS]");
+        player.CmdUpdateScore(kills, deaths);
     }
 }

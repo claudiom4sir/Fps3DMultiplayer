@@ -39,6 +39,8 @@ public class PlayerSetup : NetworkBehaviour {
         // set playerController in playerUIInstance
         PlayerUI pUI = playerUIInstance.GetComponent<PlayerUI>();
         pUI.playerController = GetComponent<PlayerController>();
+        if (pUI.playerController == null)
+            Debug.Log("error");
     }
 
     public GameObject GetPlayerUIInstace()
@@ -57,9 +59,9 @@ public class PlayerSetup : NetworkBehaviour {
     public override void OnStartClient()
     {
         base.OnStartClient();
+        player = GetComponent<Player>();
         SetPlayerName();    // it called here because OnStartClient() will be called before Start()
         string playerID = GetPlayerName();
-        player = GetComponent<Player>();
         GameManager.RegisterPlayer(playerID, player);
     }
 

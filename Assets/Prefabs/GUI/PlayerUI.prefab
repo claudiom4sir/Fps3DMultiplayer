@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 224655460454182262}
   - component: {fileID: 222910582005578332}
   - component: {fileID: 114589188105642406}
-  - component: {fileID: 114072310720555356}
+  - component: {fileID: 114197539839468352}
   m_Layer: 5
   m_Name: Scoreboard
   m_TagString: Untagged
@@ -336,17 +336,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114072310720555356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1662857646422890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62cf4c1063df9fd4c8001bba68b48fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114079930299987080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -503,6 +492,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114197539839468352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662857646422890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64d32231541c564c85a9d925dec7604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScoreboardItem: {fileID: 0}
+  scorePanel: {fileID: 0}
 --- !u!114 &114256522352297622
 MonoBehaviour:
   m_ObjectHideFlags: 1

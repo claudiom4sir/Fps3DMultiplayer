@@ -1009,6 +1009,7 @@ MonoBehaviour:
   - {fileID: 1722445814171270}
   deathEffect: {fileID: 1760756599188792, guid: 63b8ec2b2987dfa49bdb82165f8547dc,
     type: 2}
+  username: 
   kills: 0
   deaths: 0
 --- !u!114 &114834717904168542
