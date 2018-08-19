@@ -10,10 +10,12 @@ public class PlayerScore : NetworkBehaviour {
 
     private void Start() // only local player can use this script, because if it's not, PlayerSetup will disable it
     {
-        player = GetComponent<Player>();
-        SyncScore();
         if(isLocalPlayer) // only localplayer can sync his stats
+        {
+            player = GetComponent<Player>();
+            SyncScore();
             StartCoroutine(SendStatsData());
+        }
     }
 
     private IEnumerator SendStatsData() // used for send data to the server every syncTime seconds

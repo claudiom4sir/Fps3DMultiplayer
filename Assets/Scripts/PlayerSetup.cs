@@ -26,8 +26,16 @@ public class PlayerSetup : NetworkBehaviour {
         { 
             SetAllLayer(playerGraphic, LayerMask.NameToLayer(DONTDRAWLAYER));   // NameToLayer give an index from the string layer
             CreateUI(); // only local player has a playerUI
+            if (UserAccountManager.singleton.isLoggedIn)
+                CmdSetUsername(UserAccountManager.singleton.username);
             player.PlayerSetup();
         }
+    }
+
+    [Command]
+    private void CmdSetUsername(string _username)
+    {
+        player.username = _username;
     }
 
     private void CreateUI()

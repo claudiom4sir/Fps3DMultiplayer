@@ -22,6 +22,8 @@ public class PlayerShoot : NetworkBehaviour {
             return;
         if (PauseMenuUI.isActive)
             return;
+        if (Input.GetKeyDown(KeyCode.K))
+            CmdPlayerShoot(gameObject.name, 99999, gameObject.name);
         currentWeapon = weaponManager.GetCurrentWeapon();
         if (Input.GetButtonDown("Fire1"))
             InvokeRepeating("Shoot", 0f, 60f / currentWeapon.fireRate);

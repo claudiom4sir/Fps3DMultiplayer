@@ -3,16 +3,20 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking.Match;
 using System;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class HostGame : MonoBehaviour { // this script doesn't need networkbehavior because it needs nothing by this class
+
+    public Text roomText;
 
     private uint maxPlayerOnRoom = 5;
     private string roomName;
 
 
-    public void SetRoomName(string name)    // it is invoked by TextField, in response of the OnEndEdit event (when you click Enter)
+    public void SetRoomName()    // it is invoked by TextField, in response of the OnEndEdit event (when you click Enter)
     {
+        string name = roomText.text;
         if (name != null && !name.Equals(""))
         {
             roomName = name;

@@ -44,8 +44,6 @@ public class Player : NetworkBehaviour {
     [Command]
     private void CmdBroadCastPlayerSetup()
     {
-        if (UserAccountManager.singleton.isLoggedIn)
-            username = UserAccountManager.singleton.username;
         RpcPlayerSetupInAllClients();
     }
 
@@ -89,7 +87,10 @@ public class Player : NetworkBehaviour {
             return;
         currentHeath = currentHeath - damage;
         if (currentHeath <= 0 && isLocalPlayer) // Die method only invoked by local player who died;
+        {
+            isDead = true;
             CmdDie(whoShootsID);
+        }
         Debug.Log(name + "now have " + currentHeath + "health");
     }
 
@@ -113,15 +114,26 @@ public class Player : NetworkBehaviour {
     [ClientRpc]
     private void RpcDie(string whoShootsID)
     {
+        //if (isLocalPlayer)
+        //{
+        //    CmdUpdateScore(kills, deaths + 1, gameObject.name);
+        //    Player whoShoots = GameManager.GetPlayer(whoShootsID);
+        //    if (whoShoots != null)
+        //        CmdUpdateScore(whoShoots.kills + 1, whoShoots.deaths, whoShootsID);
+        //    else
+        //        Debug.Log("player is null");
+        //}
         Die(whoShootsID);
     }
 
     private void Die(string whoShootsID)
     {
-        isDead = true;
-        deaths++;
-        GameManager.GetPlayer(whoShootsID).kills++;
-        Debug.Log(deaths + " " + kills);
+        if (isServer)
+        {
+            deaths++;
+            GameManager.GetPlayer(whoShootsID).kills++;
+            Debug.Log("method called");
+        }
         if (isLocalPlayer)
         {
             GameManager.singleton.SetCameraState(true);

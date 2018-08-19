@@ -52,8 +52,9 @@ public class JoinGame : MonoBehaviour {
         ClearRoomList();
         foreach(MatchInfoSnapshot info in responseData) // update the button with info on the matches
         {
-            GameObject go = Instantiate(matchInfoPrefab, roomListContent.position, Quaternion.identity);
-            go.transform.SetParent(roomListContent);
+            //GameObject go = Instantiate(matchInfoPrefab, roomListContent.position, Quaternion.identity);
+            //go.transform.SetParent(roomListContent);
+            GameObject go = Instantiate(matchInfoPrefab, roomListContent);
             JoinRoomButton jrb = go.GetComponent<JoinRoomButton>();
             if (jrb == null)
                 Debug.LogError("jrb is null");
