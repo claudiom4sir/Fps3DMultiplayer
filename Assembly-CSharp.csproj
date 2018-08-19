@@ -102,6 +102,8 @@
     <Compile Include="Assets\Import\Standard Assets\Utility\TimedObjectActivator.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Import\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <Compile Include="Assets\InfoPanel.cs" />
+    <Compile Include="Assets\InfoPanelItem.cs" />
     <Compile Include="Assets\PlayerScoreboardItem.cs" />
     <Compile Include="Assets\ScoreboardUI.cs" />
     <Compile Include="Assets\Scripts\DataTranslator.cs" />

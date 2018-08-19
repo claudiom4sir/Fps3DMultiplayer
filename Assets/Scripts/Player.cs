@@ -134,6 +134,7 @@ public class Player : NetworkBehaviour {
             GameManager.GetPlayer(whoShootsID).kills++;
             Debug.Log("method called");
         }
+        GameManager.singleton.onPlayerKillsAnotherPlayerCallBack(GameManager.GetPlayer(whoShootsID).username, username);
         if (isLocalPlayer)
         {
             GameManager.singleton.SetCameraState(true);

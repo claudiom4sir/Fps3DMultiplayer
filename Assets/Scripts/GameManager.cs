@@ -7,6 +7,12 @@ public class GameManager : MonoBehaviour {
     public static GameManager singleton;
     public MatchSetting matchSetting;
     public GameObject mainCamera;
+    public delegate void OnPlayerKillsAnotherPlayerCallBack(string whoKilld, string whoDied);
+    public OnPlayerKillsAnotherPlayerCallBack onPlayerKillsAnotherPlayerCallBack;
+    public delegate void OnPlayerJoinCallBack(string username);
+    public OnPlayerJoinCallBack onPlayerJoinCallBack;
+    public delegate void OnPlayerLeaveRoomCallBack(string username);
+    public OnPlayerLeaveRoomCallBack onPlayerLeaveRoomCallBack;
 
     private void Awake()
     {
