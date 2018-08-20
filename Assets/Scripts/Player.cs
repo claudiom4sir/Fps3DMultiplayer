@@ -56,6 +56,7 @@ public class Player : NetworkBehaviour {
             for (int i = 0; i < disableOnDeath.Length; i++) // used for store the value
                 wasEnabled[i] = disableOnDeath[i].enabled;
             isFirstSetup = false;
+            GameManager.singleton.onPlayerJoinCallBack(UserAccountManager.singleton.username);
         }
         SetDefault();
     }

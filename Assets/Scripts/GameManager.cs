@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager singleton;
     public MatchSetting matchSetting;
     public GameObject mainCamera;
+
+    // these is a callback methods will be invoked when one specif event happens
     public delegate void OnPlayerKillsAnotherPlayerCallBack(string whoKilld, string whoDied);
     public OnPlayerKillsAnotherPlayerCallBack onPlayerKillsAnotherPlayerCallBack;
     public delegate void OnPlayerJoinCallBack(string username);
