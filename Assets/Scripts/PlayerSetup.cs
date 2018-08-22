@@ -36,6 +36,13 @@ public class PlayerSetup : NetworkBehaviour {
     private void CmdSetUsername(string _username)
     {
         player.username = _username;
+        RpcShowPlayerJoinMessage(_username);
+    }
+
+    [ClientRpc]
+    private void RpcShowPlayerJoinMessage(string _username) // this method might be in InfoPanel class
+    {
+        GameManager.singleton.onPlayerJoinCallBack(_username);
     }
 
     private void CreateUI()
@@ -90,6 +97,8 @@ public class PlayerSetup : NetworkBehaviour {
             GameManager.singleton.SetCameraState(true);
         GameManager.UnRegisterPlayer(gameObject.name);
         Destroy(playerUIInstance);
+        if(!isLocalPlayer) // if is not local player, before be destroyed, it shows the message in InfoPanel 
+            GameManager.singleton.onPlayerLeaveRoomCallBack(player.username);
     }
 
     private void AssigneRemotePlayerLayer()
