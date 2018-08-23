@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class WeaponManager : NetworkBehaviour {
 
     public PlayerWeapon startWeapon;
     public Transform weaponHolder;
     private const string weaponLayerName = "Weapon";
+    public bool isReloading = false;
 
     private PlayerWeapon currentWeapon;
     private GameObject weaponInstance;
     private WeaponGraphic weaponGraphics;
+
 
 	private void Start ()
     {
@@ -42,4 +45,19 @@ public class WeaponManager : NetworkBehaviour {
     {
         return weaponGraphics;
     }
+
+    public void Reload()
+    {
+        isReloading = true;
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+        Debug.Log("Reloading...");
+        yield return new WaitForSeconds(currentWeapon.reloadingTime);
+        currentWeapon.SetCurrentBullets(currentWeapon.maxBullets);
+        isReloading = false;
+    }
+
 }

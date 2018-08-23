@@ -22,6 +22,8 @@ public class UserAccountManager : MonoBehaviour {
         }
         else
             Destroy(gameObject); // Awake will be called every time we turn on LoginScene
+            // the reason why we destroy this gameobject is because if we change scene, when we will come back another
+            // object like this will be created
     }
 
     public void LogIn(string user, string pass)

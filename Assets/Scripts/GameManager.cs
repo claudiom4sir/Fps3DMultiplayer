@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
     {
         if (singleton == null) // implementation of singleton pattern, so exists only one instance of this object
             singleton = this;
+        else
+            Destroy(gameObject);
     }
 
     public void SetCameraState(bool value)

@@ -22,9 +22,14 @@ public class PlayerShoot : NetworkBehaviour {
             return;
         if (PauseMenuUI.isActive)
             return;
-        if (Input.GetKeyDown(KeyCode.K))
-            CmdPlayerShoot(gameObject.name, 99999, gameObject.name);
+        if (weaponManager.isReloading)
+            return;
         currentWeapon = weaponManager.GetCurrentWeapon();
+        if (currentWeapon.GetCurrentBullets() <= currentWeapon.maxBullets)
+            if (Input.GetKeyDown(KeyCode.R) || currentWeapon.GetCurrentBullets() <= 0)
+                weaponManager.Reload();
+        if (Input.GetKeyDown(KeyCode.K)) // used for suiciding
+            CmdPlayerShoot(gameObject.name, 99999, gameObject.name);
         if (Input.GetButtonDown("Fire1"))
             InvokeRepeating("Shoot", 0f, 60f / currentWeapon.fireRate);
         else if (Input.GetButtonUp("Fire1"))
@@ -61,7 +66,10 @@ public class PlayerShoot : NetworkBehaviour {
     [Client] // it is used for say that this method will be invoked only on the client
     private void Shoot()
     {
+        if (weaponManager.isReloading)
+            return;
         CmdOnShoot();
+        currentWeapon.SetCurrentBullets(currentWeapon.GetCurrentBullets() - 1);
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
