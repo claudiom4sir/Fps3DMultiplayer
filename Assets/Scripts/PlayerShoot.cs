@@ -25,14 +25,14 @@ public class PlayerShoot : NetworkBehaviour {
         if (weaponManager.isReloading)
             return;
         currentWeapon = weaponManager.GetCurrentWeapon();
-        if (currentWeapon.GetCurrentBullets() <= currentWeapon.maxBullets)
+        if (currentWeapon.GetCurrentBullets() < currentWeapon.maxBullets)
             if (Input.GetKeyDown(KeyCode.R) || currentWeapon.GetCurrentBullets() <= 0)
                 weaponManager.Reload();
         if (Input.GetKeyDown(KeyCode.K)) // used for suiciding
             CmdPlayerShoot(gameObject.name, 99999, gameObject.name);
         if (Input.GetButtonDown("Fire1"))
             InvokeRepeating("Shoot", 0f, 60f / currentWeapon.fireRate);
-        else if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1"))
             CancelInvoke("Shoot");
     }
 
